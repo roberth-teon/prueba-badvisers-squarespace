@@ -62,16 +62,14 @@ function initHeaderTheme() {
     return;
   }
 
-  var observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        header.classList.toggle('badv-site-header--light', !entry.isIntersecting);
-      });
-    },
-    { threshold: 0, rootMargin: '-72px 0px 0px 0px' }
-  );
+  function updateState() {
+    var stillInHero = hero.getBoundingClientRect().bottom > 72;
+    header.classList.toggle('badv-site-header--light', !stillInHero);
+  }
 
-  observer.observe(hero);
+  updateState();
+  window.addEventListener('scroll', updateState, { passive: true });
+  window.addEventListener('resize', updateState);
 }
 
 document.addEventListener('DOMContentLoaded', function () {
