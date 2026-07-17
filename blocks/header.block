@@ -1,20 +1,10 @@
 
 <header id="header" class="badv-site-header" role="banner">
+  {# El header siempre muestra el wordmark "B." como en el mockup, incluso
+     si el sitio tiene un logo completo configurado en Diseño > Logo (ese
+     logo completo solo se usa en el panel lateral y en el footer). }
   <a href="/" class="badv-logo-link" aria-label="{siteTitle} — Inicio">
-  {.section website}
-    {.section logoImageUrl}
-      <span class="badv-logo-image">
-        {#  we don't know the max width here, so setting sizes to 1500, which was the requested size before image component migration  }
-        {.ctx @image src=logoImageUrl alt=siteTitle}
-        {@image|apply/apply-image-component.block/
-          /sizes=1500px/
-          /elementTiming=wf-header-branding-logo/
-        }
-      </span>
-    {.or}
-      <span class="logo logo--white logo--md">B<span class="logo-dot">.</span></span>
-    {.end}
-  {.end}
+    <span class="logo logo--white logo--md">B<span class="logo-dot">.</span></span>
   </a>
 
   <button type="button" id="menu-toggle" class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
