@@ -33,11 +33,13 @@ html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
 
 /* Squarespace aplica nativamente max-width: @pageWidth (640px, definido en
    tweak.less) + padding responsive a .site-page (el <main> que envuelve el
-   contenido de cada página). Nuestro diseño es full-bleed y cada sección
-   define su propio ancho vía .container, así que anulamos esa restricción
-   nativa. Se usa !important porque las reglas nativas de site-outer-padding-*
+   contenido de cada página). Solo el Home es full-bleed (cada sección define
+   su propio ancho vía .container); el resto de páginas (Publicaciones, etc.)
+   debe conservar el max-width/padding nativo de Squarespace o se rompen
+   componentes nativos como el grid del blog. Se acota con body.homepage.
+   Se usa !important porque las reglas nativas de site-outer-padding-*
    tienen más especificidad (dos clases) que un simple .site-page. */
-.site-page {
+body.homepage .site-page {
   max-width: none !important;
   margin: 0 !important;
   padding: 0 !important;
