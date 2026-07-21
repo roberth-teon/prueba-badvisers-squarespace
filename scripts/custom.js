@@ -86,6 +86,53 @@ function initCapacidadesGrid() {
   var layout = document.querySelector('.site-page .sqs-layout');
   if (!layout) return;
 
+  var bannerImage = document.querySelector('.page-banner-image');
+  if (bannerImage && !bannerImage.getAttribute('src')) {
+    var bannerSource = bannerImage.getAttribute('data-src');
+    if (bannerSource) bannerImage.setAttribute('src', bannerSource);
+  }
+
+  var mainContent = layout.parentElement;
+  if (mainContent && !mainContent.querySelector('.badv-capacidades-intro')) {
+    var pageTitle = document.querySelector('.page-title');
+    var pageDescription = document.querySelector('.page-description');
+    var intro = document.createElement('section');
+    var introCopy = document.createElement('div');
+    var introLabel = document.createElement('p');
+    var introTitle = document.createElement('h2');
+    var introDescription = document.createElement('p');
+    var watermark = document.createElement('div');
+    var watermarkLetter = document.createElement('span');
+    var watermarkDot = document.createElement('span');
+
+    intro.className = 'badv-capacidades-intro';
+    introCopy.className = 'badv-capacidades-intro__copy';
+    introLabel.className = 'badv-capacidades-intro__label';
+    introTitle.className = 'badv-capacidades-intro__title';
+    introDescription.className = 'badv-capacidades-intro__description';
+    watermark.className = 'badv-capacidades-intro__watermark';
+    watermark.setAttribute('aria-hidden', 'true');
+    watermarkLetter.className = 'badv-capacidades-intro__letter';
+    watermarkDot.className = 'badv-capacidades-intro__dot';
+
+    introLabel.textContent = 'Servicios';
+    introTitle.textContent = pageTitle ? pageTitle.textContent.trim() : 'Nuestras Capacidades';
+    introDescription.textContent = pageDescription
+      ? pageDescription.textContent.trim()
+      : 'Capital global para ambiciones sin fronteras.';
+    watermarkLetter.textContent = 'B';
+    watermarkDot.textContent = '.';
+
+    introCopy.appendChild(introLabel);
+    introCopy.appendChild(introTitle);
+    introCopy.appendChild(introDescription);
+    watermark.appendChild(watermarkLetter);
+    watermark.appendChild(watermarkDot);
+    intro.appendChild(introCopy);
+    intro.appendChild(watermark);
+    mainContent.insertBefore(intro, layout);
+  }
+
   var blocks = Array.prototype.slice.call(
     layout.querySelectorAll('.sqs-block-image')
   ).slice(0, 5);
@@ -107,10 +154,28 @@ function initCapacidadesGrid() {
     'project-finance'
   ];
 
+  var icons = [
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M7 9h.01M17 15h.01"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 6-7"/><path d="M16 7h4v4"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21V10l8-5 8 5v11"/><path d="M9 21v-6h6v6M8 10h.01M12 10h.01M16 10h.01"/></svg>'
+  ];
+
   blocks.forEach(function (block, index) {
     block.classList.add('badv-capacidades-card');
     block.classList.add('badv-capacidades-card--' + (index + 1));
     block.id = anchors[index];
+
+    var cardCopy = block.querySelector('.image-card');
+    var cardTitle = block.querySelector('.image-title-wrapper');
+    if (cardCopy && cardTitle && !cardCopy.querySelector('.badv-capacidades-card__icon')) {
+      var icon = document.createElement('div');
+      icon.className = 'badv-capacidades-card__icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.innerHTML = icons[index];
+      cardCopy.insertBefore(icon, cardTitle);
+    }
   });
 }
 
