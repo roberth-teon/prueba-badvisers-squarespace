@@ -688,6 +688,9 @@ body.nav-open .badv-side-nav { transform: translate(0, -50%); visibility: visibl
   grid-template-columns: 1fr;
   gap: 2rem;
 }
+.collection-type-blog.view-list .site-page {
+  padding-top: 6rem;
+}
 @media (min-width: 640px) {
   .collection-type-blog.view-list .BlogList,
   .collection-type-blog.view-list .sqs-blog-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -732,6 +735,7 @@ body.nav-open .badv-side-nav { transform: translate(0, -50%); visibility: visibl
 .collection-type-blog.view-list .BlogList-item-image img,
 .collection-type-blog.view-list img.BlogList-item-image {
   width: 100%;
+  max-width: none !important;
   height: 13rem;
   object-fit: cover;
 }
