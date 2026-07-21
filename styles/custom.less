@@ -598,6 +598,12 @@ body.nav-open .badv-side-nav { transform: translate(0, -50%); visibility: visibl
    genera el systemCollection "blog" de Squarespace.
    ========================================================================== */
 
+/* En el blog el header debe reservar su altura en el flujo. Así el título o
+   las tarjetas no quedan debajo de él cuando el navegador restaura el scroll. */
+.collection-type-blog .badv-site-header {
+  position: sticky;
+}
+
 .collection-type-blog .site-page {
   width: 100%;
   max-width: @max-w;
@@ -689,7 +695,7 @@ body.nav-open .badv-side-nav { transform: translate(0, -50%); visibility: visibl
   gap: 2rem;
 }
 .collection-type-blog.view-list .site-page {
-  padding-top: 6rem !important;
+  padding-top: 3rem !important;
 }
 @media (min-width: 640px) {
   .collection-type-blog.view-list .BlogList,
@@ -795,7 +801,7 @@ body.nav-open .badv-side-nav { transform: translate(0, -50%); visibility: visibl
 /* Detalle: tipografía editorial y medios añadidos con bloques nativos. */
 .collection-type-blog.view-item .site-page {
   max-width: 80rem;
-  padding-top: 6rem !important;
+  padding-top: 3rem !important;
 }
 .collection-type-blog.view-item .BlogItem { color: rgba(26, 61, 107, 0.9); }
 .collection-type-blog.view-item .BlogItem-title { color: @navy; }
