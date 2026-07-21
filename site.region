@@ -59,7 +59,7 @@
 
         </main>
 
-        <footer id="footer" class="badv-site-footer" role="contentinfo">
+        <footer id="contacto" class="badv-site-footer" role="contentinfo">
           <div class="badv-footer-main container">
             <div class="badv-footer-brand">
               <a href="/" class="badv-footer-brand__link" aria-label="{siteTitle} — Inicio">
@@ -86,7 +86,7 @@
                   <li><a href="/sectores">Sectores</a></li>
                   <li><a href="/#casos-de-exito">Transacciones</a></li>
                   <li><a href="/equipo">Expertise</a></li>
-                  <li><a href="/#insights">Publicaciones</a></li>
+                  <li><a href="/publicaciones">Publicaciones</a></li>
                   <li><a href="/#contacto">Contacto</a></li>
                 </ul>
               </div>
@@ -100,10 +100,10 @@
                   <li><a href="/capacidades#project-finance">Project Finance</a></li>
                 </ul>
               </div>
-              <div class="badv-footer-col" id="insights">
+              <div class="badv-footer-col">
                 <h3 class="badv-footer-col__title">Publicaciones</h3>
                 <ul class="badv-footer-nav">
-                  <li><a href="#">Publicaciones</a></li>
+                  <li><a href="/publicaciones">Publicaciones</a></li>
                   <li><a href="mailto:info@b-advisers.com?subject=Suscripci%C3%B3n%20a%20insights">Suscríbase</a></li>
                 </ul>
               </div>

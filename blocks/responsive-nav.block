@@ -28,7 +28,7 @@
         <li><a href="/sectores" data-nav="/sectores">Sectores</a></li>
         <li><a href="/#casos-de-exito">Transacciones</a></li>
         <li><a href="/equipo" data-nav="/equipo">Expertise</a></li>
-        <li><a href="/#insights">Publicaciones</a></li>
+        <li><a href="/publicaciones" data-nav="/publicaciones">Publicaciones</a></li>
       </ul>
     </nav>
   </div>

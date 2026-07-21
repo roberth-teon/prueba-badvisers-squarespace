@@ -53,7 +53,9 @@ function initNavPanel() {
 
 function initHeaderTheme() {
   var header = document.querySelector('.badv-site-header');
-  var hero = document.querySelector('.hero');
+  // Las páginas hechas con Code Blocks usan `.hero`; las colecciones nativas
+  // (Blog, Events, etc.) renderizan el hero como `.page-banner-wrapper`.
+  var hero = document.querySelector('.hero, .page-banner-wrapper');
 
   if (!header) return;
 
