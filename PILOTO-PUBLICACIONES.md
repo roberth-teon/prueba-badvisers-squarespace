@@ -3,31 +3,86 @@
 Esta prueba usa el Blog nativo de Squarespace. El repositorio ya contiene los
 estilos para el índice, el artículo y tres componentes editoriales especiales.
 
-## 1. Crear la colección
+## 1. Configurar la colección creada
 
-1. En **Pages**, pulsa `+` y elige **Blog**.
-2. Nómbrala `Publicaciones`.
-3. En sus ajustes, define el URL slug como `publicaciones`.
-4. Déjala en **Not Linked** durante la prueba. Esto no cambia su URL.
-5. En la imagen/thumbnail de la colección, carga:
+La colección `Publicaciones` ya está creada. En esta versión del panel no
+aparece la sección **Not Linked**; no hace falta buscarla. La navegación del
+sitio está controlada por la plantilla y ya enlaza directamente a
+`/publicaciones`.
+
+1. En la barra izquierda, junto a `Publicaciones`, pulsa el **engranaje**.
+2. En **General** configura:
+   - **Slug de la URL:** `/publicaciones` (como aparece actualmente).
+   - **Habilitar página:** activado.
+   - **Publicaciones por página:** `9` para obtener hasta tres filas de tres.
+   - **Descripción de la página:**
+
+     `Análisis y perspectivas sobre mercados de capitales, estructuración financiera e inversión.`
+
+3. En el menú izquierdo del mismo panel, abre **Multimedia**.
+4. En **Imagen destacada / video**, pulsa **Añadir imagen** y carga:
    `badvisers-restore/html/wp-content/themes/b-advisers/assets/images/hero/hero-city-skyline.jpg`
-6. Usa como descripción:
-
-   `Análisis y perspectivas sobre mercados de capitales, estructuración financiera e inversión.`
+   Esta es la imagen de banner de la colección en Squarespace 7.0. No se llama
+   `thumbnail` en la interfaz en español.
+5. No uses **Imagen de redes sociales** para el banner; esa imagen solo se usa
+   al compartir el enlace.
+6. Cierra la configuración. Squarespace guarda estos ajustes desde el propio
+   panel; si aparece un botón **Guardar**, púlsalo antes de cerrar.
 
 ## 2. Crear el post piloto
 
-- Título: `Tendencias en levantamiento de capital para 2026`
-- Slug: `tendencias-en-levantamiento-de-capital-para-2026`
-- Categoría: `Levantamiento de Capital`
-- Extracto:
+### Abrir el editor correcto
+
+1. Regresa a la pantalla donde aparece `Publicaciones` en la barra izquierda.
+2. Pulsa el botón **`+` situado a la derecha del engranaje**, en la misma fila
+   de `Publicaciones`. Ese botón crea un post; el `+` general de Pages crea una
+   página diferente.
+3. Se abrirá un post nuevo con el campo **Escribe el título de la
+   publicación...** y un bloque de texto inicial.
+4. Escribe como título:
+
+   `Tendencias en levantamiento de capital para 2026`
+
+5. No publiques todavía. Primero carga el cuerpo y luego abre la pestaña
+   **Opciones** del editor del post.
+
+### Opciones del post
+
+Dentro del post, pulsa **Opciones** y completa:
+
+- **URL de la publicación:**
+  `tendencias-en-levantamiento-de-capital-para-2026`
+- **Imagen destacada:** pulsa **Añadir imagen** y carga
+  `badvisers-restore/html/wp-content/uploads/2026/07/reunion.webp`.
+- **Extracto:**
 
   `El levantamiento de capital en 2026 exige más que un buen pitch: los inversionistas institucionales están evaluando con lupa la gobernanza, la trazabilidad financiera y la capacidad de ejecución de cada empresa antes de comprometer un solo dólar.`
 
-- Imagen destacada:
-  `badvisers-restore/html/wp-content/uploads/2026/07/reunion.webp`
+- **Autor:** selecciona el propietario o autor que publicará normalmente.
+
+Luego abre la sección o pestaña donde aparecen **Categorías y etiquetas**:
+
+1. En **Categorías**, escribe `Levantamiento de Capital`.
+2. Confirma la nueva categoría para que quede seleccionada.
+3. No hacen falta etiquetas para este piloto.
+4. Mantén los comentarios desactivados, salvo que el cliente los necesite.
+
+En algunas variantes del editor 7.0, Categorías, Estado y Comentarios aparecen
+en una pestaña **Contenido** en lugar de **Opciones**. Los nombres de los campos
+son los mismos.
+
+### Construir el cuerpo con bloques
 
 El cuerpo se arma con bloques nativos siguiendo este orden.
+
+- Usa el bloque de texto inicial para los párrafos.
+- Para añadir otro elemento, mueve el cursor entre dos bloques y pulsa el
+  punto de inserción o botón `+` que aparece.
+- Selecciona **Imagen** para la imagen interior.
+- Selecciona **Código** únicamente para las tres cajas especiales indicadas
+  abajo.
+- En cada bloque Código, desactiva **Mostrar código fuente** para que el HTML
+  se renderice como parte del artículo.
 
 ### Párrafos iniciales
 
@@ -92,12 +147,16 @@ Configurar el bloque para renderizar HTML, no para mostrar código fuente.
 
 ## 3. Publicar y comprobar
 
-1. Publica el artículo.
-2. Abre `/publicaciones` en una ventana privada.
-3. Abre el artículo desde su tarjeta.
-4. Comprueba escritorio y móvil.
-5. Verifica que el menú y ambos enlaces del footer lleven a `/publicaciones`.
-6. Verifica que `/#contacto` desplace correctamente al footer.
+1. En las opciones del post, cambia **Estado** de borrador a **Publicado** o
+   pulsa **Guardar y publicar**, según el botón que muestre el editor.
+2. Confirma la publicación cuando Squarespace lo solicite.
+3. Cierra el editor del post. El mensaje `No blog posts yet` / `No hay
+   publicaciones` debe desaparecer y debe aparecer la tarjeta del artículo.
+4. Abre `/publicaciones` en una ventana privada.
+5. Abre el artículo desde su tarjeta.
+6. Comprueba escritorio y móvil.
+7. Verifica que el menú y ambos enlaces del footer lleven a `/publicaciones`.
+8. Verifica que `/#contacto` desplace correctamente al footer.
 
 Durante la edición, Squarespace puede no mostrar exactamente el CSS del sitio.
 La comprobación visual válida debe hacerse fuera del modo edición.
