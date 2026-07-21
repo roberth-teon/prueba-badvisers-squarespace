@@ -986,6 +986,299 @@ body.nav-open .badv-side-nav { transform: translate(0, -50%); visibility: visibl
 }
 
 /* ===========================================================================
+   SECTORES — seis bloques Imagen nativos con composición tipo Póster
+   El CMS conserva imagen, título y descripción. El tema aporta hero, iconos,
+   degradado, cuadrícula y responsive sin depender de IDs generados por YUI.
+   ========================================================================== */
+
+.badv-sectores-page .page-banner-wrapper { display: none !important; }
+.badv-sectores-hero {
+  display: flex;
+  position: relative;
+  min-height: 36rem;
+  align-items: stretch;
+  justify-content: center;
+  overflow: hidden;
+  background: @navy-dark;
+}
+.badv-sectores-hero__background {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-position: center;
+  background-size: cover;
+}
+.badv-sectores-hero__background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(15, 40, 71, 0.88), rgba(74, 144, 164, 0.7));
+}
+.badv-sectores-hero__content {
+  display: flex;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 36rem;
+  padding: 8rem 1.5rem 4rem;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+}
+.badv-sectores-hero__label,
+.badv-sectores-page .badv-sectores-intro__label {
+  display: inline-flex;
+  border: 1px solid currentColor;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.badv-sectores-hero__label {
+  margin: 0 0 1.75rem;
+  padding: 0.55rem 1.4rem;
+  color: #fff;
+}
+.badv-sectores-hero__title {
+  margin: 0;
+  color: #fff;
+  font-size: 2.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.12;
+  text-transform: uppercase;
+}
+.badv-sectores-hero__description {
+  max-width: 52rem;
+  margin: 1.75rem 0 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+
+.badv-sectores-page .site-page {
+  width: 100%;
+  max-width: @max-w;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 1.5rem 5rem !important;
+}
+.badv-sectores-page .badv-sectores-intro {
+  display: flex;
+  min-height: 24rem;
+  padding: 5rem 0 4rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+}
+.badv-sectores-page .badv-sectores-intro__copy { max-width: 48rem; }
+.badv-sectores-page .badv-sectores-intro__label {
+  margin: 0 0 1.5rem;
+  padding: 0.55rem 1.35rem;
+  color: @navy;
+}
+.badv-sectores-page .badv-sectores-intro__title {
+  margin: 0;
+  color: @navy;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.badv-sectores-page .badv-sectores-intro__description {
+  margin: 1rem 0 0;
+  color: rgba(26, 61, 107, 0.68);
+  font-size: 1rem;
+  line-height: 1.65;
+}
+.badv-sectores-page .badv-sectores-intro__watermark {
+  display: flex;
+  min-width: 15rem;
+  align-items: baseline;
+  justify-content: center;
+  color: #286989;
+  font-weight: 700;
+  line-height: 0.8;
+}
+.badv-sectores-page .badv-sectores-intro__letter { font-size: 14rem; }
+.badv-sectores-page .badv-sectores-intro__dot {
+  color: #83cee1;
+  font-size: 5rem;
+}
+
+.badv-sectores-page .badv-sectores-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+.badv-sectores-page .badv-sectores-grid > .sqs-block-html {
+  display: none !important;
+}
+.badv-sectores-page .badv-sectores-card {
+  position: relative;
+  width: 100% !important;
+  min-width: 0;
+  min-height: 23rem;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 1.125rem;
+  overflow: hidden;
+  background: @navy-dark;
+  scroll-margin-top: 6rem;
+  box-shadow: 0 8px 24px rgba(15, 40, 71, 0.1);
+  transform: translateZ(0);
+}
+.badv-sectores-page .badv-sectores-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(15, 40, 71, 0.03) 18%, rgba(15, 40, 71, 0.92) 100%);
+  pointer-events: none;
+}
+.badv-sectores-page .badv-sectores-card .sqs-block-content,
+.badv-sectores-page .badv-sectores-card figure {
+  position: relative;
+  width: 100%;
+  max-width: none !important;
+  height: 100%;
+  min-height: 23rem;
+  margin: 0 !important;
+}
+.badv-sectores-page .badv-sectores-card .intrinsic {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  padding-bottom: 0 !important;
+}
+.badv-sectores-page .badv-sectores-card .image-inset,
+.badv-sectores-page .badv-sectores-card .sqs-image-shape-container-element {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.badv-sectores-page .badv-sectores-card img {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+.badv-sectores-page .badv-sectores-card:hover img { transform: scale(1.04); }
+.badv-sectores-page .badv-sectores-card .image-card-wrapper {
+  display: none !important;
+}
+.badv-sectores-page .badv-sectores-card__visual {
+  display: flex;
+  position: absolute;
+  inset: auto 1.5rem 1.5rem;
+  z-index: 3;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+}
+.badv-sectores-page .badv-sectores-card__icon {
+  display: flex;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 0 0.9rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #7dd0df;
+  color: @navy;
+  box-shadow: 0 6px 16px rgba(15, 40, 71, 0.22);
+}
+.badv-sectores-page .badv-sectores-card__icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.55;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.badv-sectores-page .badv-sectores-card__icon svg.is-fill path {
+  fill: currentColor;
+  stroke: none;
+}
+.badv-sectores-page .badv-sectores-card__title {
+  margin: 0;
+  color: #fff;
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.055em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+.badv-sectores-page .badv-sectores-card__description {
+  max-width: 27rem;
+  margin: 0.7rem 0 0;
+  color: rgba(255, 255, 255, 0.92);
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+/* El editor conserva los controles y campos originales de Squarespace. */
+.sqs-edit-mode.badv-sectores-page .badv-sectores-card__visual,
+.sqs-edit-mode-active.badv-sectores-page .badv-sectores-card__visual {
+  display: none !important;
+}
+.sqs-edit-mode.badv-sectores-page .badv-sectores-card::after,
+.sqs-edit-mode-active.badv-sectores-page .badv-sectores-card::after {
+  display: none;
+}
+.sqs-edit-mode.badv-sectores-page .badv-sectores-card .image-card-wrapper,
+.sqs-edit-mode-active.badv-sectores-page .badv-sectores-card .image-card-wrapper {
+  display: flex !important;
+  z-index: 4;
+}
+
+@media (min-width: 640px) {
+  .badv-sectores-page .badv-sectores-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .badv-sectores-hero,
+  .badv-sectores-hero__content { min-height: 28rem; }
+  .badv-sectores-hero__content { padding-top: 7rem; }
+  .badv-sectores-hero__title { font-size: 2rem; }
+  .badv-sectores-hero__description { font-size: 0.9375rem; }
+  .badv-sectores-page .badv-sectores-intro {
+    min-height: 0;
+    padding: 3.5rem 0 3rem;
+  }
+  .badv-sectores-page .badv-sectores-intro__title { font-size: 1.65rem; }
+  .badv-sectores-page .badv-sectores-intro__watermark { display: none; }
+  .badv-sectores-page .badv-sectores-card,
+  .badv-sectores-page .badv-sectores-card .sqs-block-content,
+  .badv-sectores-page .badv-sectores-card figure { min-height: 21rem; }
+}
+
+@media (min-width: 1024px) {
+  .badv-sectores-page .site-page {
+    padding-right: 2.5rem !important;
+    padding-left: 2.5rem !important;
+  }
+  .badv-sectores-page .badv-sectores-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+/* ===========================================================================
    PUBLICACIONES — Blog nativo de Squarespace 7.0
    La colección y sus posts siguen siendo 100% editables desde el CMS. Estos
    estilos traducen el lenguaje visual del blog original a las clases que

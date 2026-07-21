@@ -55,7 +55,7 @@ function initHeaderTheme() {
   var header = document.querySelector('.badv-site-header');
   // Las páginas hechas con Code Blocks usan `.hero`; las colecciones nativas
   // (Blog, Events, etc.) renderizan el hero como `.page-banner-wrapper`.
-  var hero = document.querySelector('.hero, .badv-capacidades-hero, .page-banner-wrapper');
+  var hero = document.querySelector('.hero, .badv-capacidades-hero, .badv-sectores-hero, .page-banner-wrapper');
 
   if (!header) return;
 
@@ -237,8 +237,174 @@ function initCapacidadesGrid() {
   });
 }
 
+/* Convierte los seis bloques Imagen nativos de /sectores en pósteres. La
+   imagen, el título y la descripción siguen siendo editables en Squarespace;
+   el icono y la composición visual pertenecen al tema. */
+function initSectoresGrid() {
+  var path = window.location.pathname.replace(/\/+$/, '') || '/';
+  if (path !== '/sectores') return;
+
+  document.body.classList.add('badv-sectores-page');
+
+  var layout = document.querySelector('.site-page .sqs-layout');
+  if (!layout) return;
+
+  var staticContext = window.Static && window.Static.SQUARESPACE_CONTEXT;
+  var collectionData = staticContext && staticContext.collection
+    ? staticContext.collection
+    : {};
+  var pageTitle = document.querySelector('.page-title');
+  var pageDescription = document.querySelector('.page-description');
+  var titleText = pageTitle && pageTitle.textContent.trim()
+    ? pageTitle.textContent.trim()
+    : (collectionData.title || 'Sectores Estratégicos');
+  var descriptionText = pageDescription && pageDescription.textContent.trim()
+    ? pageDescription.textContent.trim()
+    : (typeof collectionData.description === 'string'
+      ? collectionData.description.replace(/<[^>]*>/g, '').trim()
+      : 'Soluciones de capital adaptadas a las dinámicas y oportunidades de cada industria.');
+
+  var contentContainer = document.querySelector('.content-container');
+  var sitePage = document.querySelector('.site-page');
+  if (contentContainer && sitePage && !contentContainer.querySelector('.badv-sectores-hero')) {
+    var hero = document.createElement('section');
+    var heroBackground = document.createElement('div');
+    var heroContent = document.createElement('div');
+    var heroLabel = document.createElement('p');
+    var heroTitle = document.createElement('h1');
+    var heroDescription = document.createElement('p');
+    var socialImage = document.querySelector('meta[property="og:image"]');
+    var mainImage = collectionData.mainImage || {};
+    var heroSource = mainImage.assetUrl || mainImage.imageUrl || mainImage.url ||
+      (socialImage ? socialImage.getAttribute('content') : '');
+
+    hero.className = 'badv-sectores-hero';
+    heroBackground.className = 'badv-sectores-hero__background';
+    heroContent.className = 'badv-sectores-hero__content';
+    heroLabel.className = 'badv-sectores-hero__label';
+    heroTitle.className = 'badv-sectores-hero__title';
+    heroDescription.className = 'badv-sectores-hero__description';
+    if (heroSource) heroBackground.style.backgroundImage = 'url("' + heroSource + '")';
+    heroLabel.textContent = 'Industrias';
+    heroTitle.textContent = titleText;
+    heroDescription.textContent = descriptionText;
+    heroContent.appendChild(heroLabel);
+    heroContent.appendChild(heroTitle);
+    heroContent.appendChild(heroDescription);
+    hero.appendChild(heroBackground);
+    hero.appendChild(heroContent);
+    contentContainer.insertBefore(hero, sitePage);
+  }
+
+  var mainContent = layout.parentElement;
+  if (mainContent && !mainContent.querySelector('.badv-sectores-intro')) {
+    var intro = document.createElement('section');
+    var introCopy = document.createElement('div');
+    var introLabel = document.createElement('p');
+    var introTitle = document.createElement('h2');
+    var introDescription = document.createElement('p');
+    var watermark = document.createElement('div');
+    var watermarkLetter = document.createElement('span');
+    var watermarkDot = document.createElement('span');
+
+    intro.className = 'badv-sectores-intro';
+    introCopy.className = 'badv-sectores-intro__copy';
+    introLabel.className = 'badv-sectores-intro__label';
+    introTitle.className = 'badv-sectores-intro__title';
+    introDescription.className = 'badv-sectores-intro__description';
+    watermark.className = 'badv-sectores-intro__watermark';
+    watermark.setAttribute('aria-hidden', 'true');
+    watermarkLetter.className = 'badv-sectores-intro__letter';
+    watermarkDot.className = 'badv-sectores-intro__dot';
+
+    introLabel.textContent = 'Industrias';
+    introTitle.textContent = titleText;
+    introDescription.textContent = descriptionText;
+    watermarkLetter.textContent = 'B';
+    watermarkDot.textContent = '.';
+
+    introCopy.appendChild(introLabel);
+    introCopy.appendChild(introTitle);
+    introCopy.appendChild(introDescription);
+    watermark.appendChild(watermarkLetter);
+    watermark.appendChild(watermarkDot);
+    intro.appendChild(introCopy);
+    intro.appendChild(watermark);
+    mainContent.insertBefore(intro, layout);
+  }
+
+  var blocks = Array.prototype.slice.call(
+    layout.querySelectorAll('.sqs-block-image')
+  ).slice(0, 6);
+
+  if (!blocks.length) return;
+
+  var parent = blocks[0].parentElement;
+  var sameParent = blocks.length === 6 && blocks.every(function (block) {
+    return block.parentElement === parent;
+  });
+  if (sameParent) parent.classList.add('badv-sectores-grid');
+
+  var anchors = [
+    'energia',
+    'infraestructura',
+    'bienes-raices',
+    'industria-manufactura',
+    'comercio-internacional-logistica',
+    'turismo-hospitalidad'
+  ];
+  var fallbackTitles = [
+    'Energía',
+    'Infraestructura',
+    'Bienes Raíces',
+    'Industria y Manufactura',
+    'Comercio Internacional y Logística',
+    'Turismo y Hospitalidad'
+  ];
+  var icons = [
+    '<svg class="is-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 5.5 13H11l-1 9 8.5-12H13z"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 18h18M5 18v-5M19 18v-5M5 13c3 0 5-2 7-5 2 3 4 5 7 5M8 12v6M16 12v6"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V9l7-4 7 4v12M9 11h2v2H9zM13 11h2v2h-2zM9 15h2v2H9zM13 15h2v2h-2z"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21V10l6 3V9l6 4V7l6 4v10zM6 17h2M11 17h2M16 17h2M5 10 4 4h3l1 7"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15h16M6 15a6 6 0 0 1 12 0M12 9V6M9 6h6M5 19h14"/></svg>'
+  ];
+
+  blocks.forEach(function (block, index) {
+    block.classList.add('badv-sectores-card');
+    block.classList.add('badv-sectores-card--' + (index + 1));
+    block.id = anchors[index];
+
+    var figure = block.querySelector('figure') || block.querySelector('.sqs-block-content');
+    var cardTitle = block.querySelector('.image-title');
+    var cardSubtitle = block.querySelector('.image-subtitle');
+    if (figure && !figure.querySelector('.badv-sectores-card__visual')) {
+      var visual = document.createElement('div');
+      var icon = document.createElement('div');
+      var heading = document.createElement('h3');
+      var description = document.createElement('p');
+
+      visual.className = 'badv-sectores-card__visual';
+      icon.className = 'badv-sectores-card__icon';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.innerHTML = icons[index];
+      heading.className = 'badv-sectores-card__title';
+      heading.textContent = cardTitle && cardTitle.textContent.trim()
+        ? cardTitle.textContent.trim()
+        : fallbackTitles[index];
+      description.className = 'badv-sectores-card__description';
+      description.textContent = cardSubtitle ? cardSubtitle.textContent.trim() : '';
+      visual.appendChild(icon);
+      visual.appendChild(heading);
+      visual.appendChild(description);
+      figure.appendChild(visual);
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   initNavPanel();
   initCapacidadesGrid();
+  initSectoresGrid();
   initHeaderTheme();
 });
