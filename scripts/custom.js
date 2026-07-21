@@ -55,7 +55,7 @@ function initHeaderTheme() {
   var header = document.querySelector('.badv-site-header');
   // Las páginas hechas con Code Blocks usan `.hero`; las colecciones nativas
   // (Blog, Events, etc.) renderizan el hero como `.page-banner-wrapper`.
-  var hero = document.querySelector('.hero, .page-banner-wrapper');
+  var hero = document.querySelector('.hero, .badv-capacidades-hero, .page-banner-wrapper');
 
   if (!header) return;
 
@@ -86,6 +86,53 @@ function initCapacidadesGrid() {
   var layout = document.querySelector('.site-page .sqs-layout');
   if (!layout) return;
 
+  var staticContext = window.Static && window.Static.SQUARESPACE_CONTEXT;
+  var collectionData = staticContext && staticContext.collection
+    ? staticContext.collection
+    : {};
+  var pageTitle = document.querySelector('.page-title');
+  var pageDescription = document.querySelector('.page-description');
+  var titleText = pageTitle && pageTitle.textContent.trim()
+    ? pageTitle.textContent.trim()
+    : (collectionData.title || 'Nuestras Capacidades');
+  var descriptionText = pageDescription && pageDescription.textContent.trim()
+    ? pageDescription.textContent.trim()
+    : (typeof collectionData.description === 'string'
+      ? collectionData.description.replace(/<[^>]*>/g, '').trim()
+      : 'Capital global para ambiciones sin fronteras.');
+
+  var contentContainer = document.querySelector('.content-container');
+  var sitePage = document.querySelector('.site-page');
+  if (contentContainer && sitePage && !contentContainer.querySelector('.badv-capacidades-hero')) {
+    var hero = document.createElement('section');
+    var heroBackground = document.createElement('div');
+    var heroContent = document.createElement('div');
+    var heroLabel = document.createElement('p');
+    var heroTitle = document.createElement('h1');
+    var heroDescription = document.createElement('p');
+    var socialImage = document.querySelector('meta[property="og:image"]');
+    var mainImage = collectionData.mainImage || {};
+    var heroSource = mainImage.assetUrl || mainImage.imageUrl || mainImage.url ||
+      (socialImage ? socialImage.getAttribute('content') : '');
+
+    hero.className = 'badv-capacidades-hero';
+    heroBackground.className = 'badv-capacidades-hero__background';
+    heroContent.className = 'badv-capacidades-hero__content';
+    heroLabel.className = 'badv-capacidades-hero__label';
+    heroTitle.className = 'badv-capacidades-hero__title';
+    heroDescription.className = 'badv-capacidades-hero__description';
+    if (heroSource) heroBackground.style.backgroundImage = 'url("' + heroSource + '")';
+    heroLabel.textContent = 'Servicios';
+    heroTitle.textContent = titleText;
+    heroDescription.textContent = descriptionText;
+    heroContent.appendChild(heroLabel);
+    heroContent.appendChild(heroTitle);
+    heroContent.appendChild(heroDescription);
+    hero.appendChild(heroBackground);
+    hero.appendChild(heroContent);
+    contentContainer.insertBefore(hero, sitePage);
+  }
+
   var bannerImage = document.querySelector('.page-banner-image');
   if (bannerImage && !bannerImage.getAttribute('src')) {
     var bannerSource = bannerImage.getAttribute('data-src');
@@ -94,8 +141,6 @@ function initCapacidadesGrid() {
 
   var mainContent = layout.parentElement;
   if (mainContent && !mainContent.querySelector('.badv-capacidades-intro')) {
-    var pageTitle = document.querySelector('.page-title');
-    var pageDescription = document.querySelector('.page-description');
     var intro = document.createElement('section');
     var introCopy = document.createElement('div');
     var introLabel = document.createElement('p');
@@ -116,10 +161,8 @@ function initCapacidadesGrid() {
     watermarkDot.className = 'badv-capacidades-intro__dot';
 
     introLabel.textContent = 'Servicios';
-    introTitle.textContent = pageTitle ? pageTitle.textContent.trim() : 'Nuestras Capacidades';
-    introDescription.textContent = pageDescription
-      ? pageDescription.textContent.trim()
-      : 'Capital global para ambiciones sin fronteras.';
+    introTitle.textContent = titleText;
+    introDescription.textContent = descriptionText;
     watermarkLetter.textContent = 'B';
     watermarkDot.textContent = '.';
 
@@ -168,19 +211,34 @@ function initCapacidadesGrid() {
     block.id = anchors[index];
 
     var cardCopy = block.querySelector('.image-card');
-    var cardTitle = block.querySelector('.image-title-wrapper');
-    if (cardCopy && cardTitle && !cardCopy.querySelector('.badv-capacidades-card__icon')) {
+    var cardTitle = block.querySelector('.image-title');
+    var cardSubtitle = block.querySelector('.image-subtitle');
+    if (cardCopy && cardTitle && !cardCopy.querySelector('.badv-capacidades-card__visual')) {
+      var visual = document.createElement('div');
+      var heading = document.createElement('div');
       var icon = document.createElement('div');
+      var headingText = document.createElement('h3');
+      var description = document.createElement('p');
+
+      visual.className = 'badv-capacidades-card__visual';
+      heading.className = 'badv-capacidades-card__heading';
       icon.className = 'badv-capacidades-card__icon';
       icon.setAttribute('aria-hidden', 'true');
       icon.innerHTML = icons[index];
-      cardCopy.insertBefore(icon, cardTitle);
+      headingText.textContent = cardTitle.textContent.trim();
+      description.className = 'badv-capacidades-card__description';
+      description.textContent = cardSubtitle ? cardSubtitle.textContent.trim() : '';
+      heading.appendChild(icon);
+      heading.appendChild(headingText);
+      visual.appendChild(heading);
+      visual.appendChild(description);
+      cardCopy.appendChild(visual);
     }
   });
 }
 
 document.addEventListener('DOMContentLoaded', function () {
   initNavPanel();
-  initHeaderTheme();
   initCapacidadesGrid();
+  initHeaderTheme();
 });

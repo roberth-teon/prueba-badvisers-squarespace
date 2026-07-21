@@ -597,54 +597,34 @@ body.nav-open .badv-side-nav { transform: translate(0, -50%); visibility: visibl
    las clases de esta sección sin mover ni duplicar el contenido.
    ========================================================================== */
 
-/* Hero nativo: imagen destacada, título y descripción permanecen editables
-   desde la configuración de la página. */
-.badv-capacidades-page .page-banner-wrapper {
-  display: flex !important;
+/* Hero garantizado por el tema. Toma imagen, título y descripción de los
+   metadatos/configuración de la página y evita depender del toggle global de
+   banners de la plantilla 7.0. */
+.badv-capacidades-page .page-banner-wrapper { display: none !important; }
+.badv-capacidades-hero {
+  display: flex;
   position: relative;
   min-height: 36rem;
-  margin: 0 !important;
   align-items: stretch;
   justify-content: center;
   overflow: hidden;
   background: @navy-dark;
 }
-body#collection-6a5fa85178edc158cfc7d022 .content-container > .page-banner-wrapper {
-  display: flex !important;
-  visibility: visible !important;
-  min-height: 36rem !important;
-}
-.badv-capacidades-page .page-banner-image-container,
-.badv-capacidades-page .page-banner-image-container.hide-collection-image {
-  display: block !important;
-  visibility: visible !important;
+.badv-capacidades-hero__background {
   position: absolute;
   inset: 0;
   z-index: 1;
-  width: 100% !important;
-  max-width: none !important;
-  height: 100% !important;
+  background-position: center;
+  background-size: cover;
 }
-.badv-capacidades-page .page-banner-image {
-  position: absolute !important;
-  inset: 0;
-  width: 100% !important;
-  max-width: none !important;
-  height: 100% !important;
-  max-height: none !important;
-  object-fit: cover;
-  transform: none !important;
-}
-.badv-capacidades-page .page-banner-image-container::after {
+.badv-capacidades-hero__background::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(90deg, rgba(26, 61, 107, 0.88), rgba(74, 144, 164, 0.72));
 }
-.badv-capacidades-page .page-text-wrapper,
-.badv-capacidades-page .page-text-wrapper.hide {
-  display: flex !important;
-  visibility: visible !important;
+.badv-capacidades-hero__content {
+  display: flex;
   position: relative;
   z-index: 2;
   width: 100%;
@@ -656,10 +636,9 @@ body#collection-6a5fa85178edc158cfc7d022 .content-container > .page-banner-wrapp
   color: #fff;
   text-align: center;
 }
-.badv-capacidades-page .page-text-wrapper::before {
-  content: "Servicios";
+.badv-capacidades-hero__label {
   display: inline-flex;
-  margin-bottom: 1.75rem;
+  margin: 0 0 1.75rem;
   padding: 0.55rem 1.4rem;
   border: 1px solid rgba(255, 255, 255, 0.85);
   border-radius: 9999px;
@@ -669,8 +648,7 @@ body#collection-6a5fa85178edc158cfc7d022 .content-container > .page-banner-wrapp
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.badv-capacidades-page .page-title {
-  display: block !important;
+.badv-capacidades-hero__title {
   margin: 0;
   color: #fff;
   font-size: 2.75rem;
@@ -679,10 +657,9 @@ body#collection-6a5fa85178edc158cfc7d022 .content-container > .page-banner-wrapp
   line-height: 1.12;
   text-transform: uppercase;
 }
-.badv-capacidades-page .page-description {
-  display: block !important;
+.badv-capacidades-hero__description {
   max-width: 48rem;
-  margin-top: 1.75rem;
+  margin: 1.75rem 0 0;
   color: rgba(255, 255, 255, 0.92);
   font-size: 1.125rem;
   line-height: 1.6;
@@ -834,22 +811,45 @@ body#collection-6a5fa85178edc158cfc7d022 .content-container > .page-banner-wrapp
   text-align: left;
 }
 .badv-capacidades-page .badv-capacidades-card .image-card {
-  display: grid !important;
+  display: block !important;
   width: 100%;
   min-height: 0 !important;
   height: auto !important;
   flex: 0 0 auto !important;
-  grid-template-columns: 3.25rem minmax(0, 1fr) !important;
-  grid-auto-flow: row !important;
-  align-items: flex-start !important;
-  justify-content: flex-start !important;
-  gap: 0.8rem 0.75rem;
+  position: static !important;
+}
+.badv-capacidades-page .badv-capacidades-card__visual {
+  display: block;
+  width: 100%;
+}
+.badv-capacidades-page .badv-capacidades-card__heading {
+  display: flex;
+  width: 100%;
+  margin-bottom: 0.9rem;
+  align-items: center;
+  gap: 0.8rem;
+}
+.badv-capacidades-page .badv-capacidades-card__heading h3 {
+  min-width: 0;
+  margin: 0;
+  color: @navy;
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.badv-capacidades-page .badv-capacidades-card__description {
+  margin: 0;
+  color: rgba(26, 61, 107, 0.76);
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.65;
 }
 .badv-capacidades-page .badv-capacidades-card__icon {
   display: flex;
+  flex: 0 0 3.25rem;
   width: 3.25rem;
   height: 3.25rem;
-  grid-column: 1;
   align-items: center;
   justify-content: center;
   color: @gold;
@@ -865,7 +865,7 @@ body#collection-6a5fa85178edc158cfc7d022 .content-container > .page-banner-wrapp
 }
 .badv-capacidades-page .badv-capacidades-card .image-title-wrapper,
 .badv-capacidades-page .badv-capacidades-card .image-subtitle-wrapper {
-  display: block !important;
+  display: none !important;
   width: 100% !important;
   min-width: 0 !important;
   min-height: 0 !important;
@@ -873,13 +873,6 @@ body#collection-6a5fa85178edc158cfc7d022 .content-container > .page-banner-wrapp
   margin: 0 !important;
   padding: 0 !important;
   flex: 0 0 auto !important;
-}
-.badv-capacidades-page .badv-capacidades-card .image-title-wrapper {
-  grid-column: 2;
-  align-self: center;
-}
-.badv-capacidades-page .badv-capacidades-card .image-subtitle-wrapper {
-  grid-column: 1 / -1;
 }
 .badv-capacidades-page .badv-capacidades-card .image-title,
 .badv-capacidades-page .badv-capacidades-card .image-title p {
@@ -929,12 +922,11 @@ body#collection-6a5fa85178edc158cfc7d022 .content-container > .page-banner-wrapp
 }
 
 @media (max-width: 639px) {
-  .badv-capacidades-page .page-banner-wrapper,
-  .badv-capacidades-page .page-text-wrapper,
-  .badv-capacidades-page .page-text-wrapper.hide { min-height: 28rem; }
-  .badv-capacidades-page .page-text-wrapper { padding-top: 7rem; }
-  .badv-capacidades-page .page-title { font-size: 2rem; }
-  .badv-capacidades-page .page-description { font-size: 0.9375rem; }
+  .badv-capacidades-hero,
+  .badv-capacidades-hero__content { min-height: 28rem; }
+  .badv-capacidades-hero__content { padding-top: 7rem; }
+  .badv-capacidades-hero__title { font-size: 2rem; }
+  .badv-capacidades-hero__description { font-size: 0.9375rem; }
   .badv-capacidades-page .badv-capacidades-intro {
     min-height: 0;
     padding: 3.5rem 0 3rem;
