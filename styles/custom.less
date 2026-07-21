@@ -592,6 +592,162 @@ body.nav-open .badv-side-nav { transform: translate(0, -50%); visibility: visibl
 .internal-page-card:focus-visible .internal-page-card__cta::after { transform: translateX(3px); }
 
 /* ===========================================================================
+   CAPACIDADES — bloques Imagen nativos de Squarespace
+   El cliente edita imagen, título y descripción desde el CMS. custom.js añade
+   las clases de esta sección sin mover ni duplicar el contenido.
+   ========================================================================== */
+
+.badv-capacidades-page .badv-site-header {
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 1px 12px rgba(26, 61, 107, 0.08);
+}
+.badv-capacidades-page .badv-site-header .logo--white { color: @navy; }
+.badv-capacidades-page .badv-site-header .menu-toggle span { background: @navy; }
+
+.badv-capacidades-page .site-page {
+  width: 100%;
+  max-width: @max-w;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 7rem 1.5rem 5rem !important;
+}
+
+.badv-capacidades-page .badv-capacidades-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+}
+
+/* Squarespace conserva un bloque HTML vacío antes de las cinco imágenes. No
+   debe participar como una sexta celda de la cuadrícula. */
+.badv-capacidades-page .badv-capacidades-grid > .sqs-block-html {
+  display: none !important;
+}
+
+.badv-capacidades-page .badv-capacidades-card {
+  display: flex;
+  width: 100% !important;
+  min-width: 0;
+  height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid #d1d9e6;
+  border-radius: 1.25rem;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(15, 40, 71, 0.05);
+  scroll-margin-top: 6rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.badv-capacidades-page .badv-capacidades-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(74, 144, 164, 0.5);
+  box-shadow: 0 12px 28px rgba(15, 40, 71, 0.11);
+}
+
+.badv-capacidades-page .badv-capacidades-card .sqs-block-content,
+.badv-capacidades-page .badv-capacidades-card figure {
+  display: flex;
+  width: 100%;
+  max-width: none !important;
+  height: 100%;
+  margin: 0 !important;
+  flex-direction: column;
+}
+
+.badv-capacidades-page .badv-capacidades-card .intrinsic {
+  position: relative;
+  width: 100%;
+  height: 13rem;
+  padding-bottom: 0 !important;
+  flex: 0 0 13rem;
+  overflow: hidden;
+  background: @panel;
+}
+.badv-capacidades-page .badv-capacidades-card .image-inset,
+.badv-capacidades-page .badv-capacidades-card .sqs-image-shape-container-element {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.badv-capacidades-page .badv-capacidades-card .sqs-image-shape-container-element img {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  max-width: none !important;
+  height: 100% !important;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+.badv-capacidades-page .badv-capacidades-card:hover .sqs-image-shape-container-element img {
+  transform: scale(1.035);
+}
+
+.badv-capacidades-page .badv-capacidades-card .image-card-wrapper {
+  display: flex;
+  padding: 1.35rem 1.5rem 1.5rem !important;
+  flex: 1;
+  background: #fff;
+  color: rgba(26, 61, 107, 0.78);
+  text-align: left;
+}
+.badv-capacidades-page .badv-capacidades-card .image-card {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+.badv-capacidades-page .badv-capacidades-card .image-title,
+.badv-capacidades-page .badv-capacidades-card .image-title p {
+  margin: 0 0 0.75rem;
+  color: @navy;
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.badv-capacidades-page .badv-capacidades-card .image-subtitle,
+.badv-capacidades-page .badv-capacidades-card .image-subtitle p {
+  margin: 0;
+  color: rgba(26, 61, 107, 0.76);
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 640px) {
+  .badv-capacidades-page .badv-capacidades-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .badv-capacidades-page .badv-capacidades-card--5 {
+    width: calc(50% - 0.75rem) !important;
+    grid-column: 1 / -1;
+    justify-self: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .badv-capacidades-page .site-page {
+    padding-right: 2.5rem !important;
+    padding-left: 2.5rem !important;
+  }
+  .badv-capacidades-page .badv-capacidades-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 1.75rem;
+  }
+  .badv-capacidades-page .badv-capacidades-card {
+    grid-column: span 2;
+  }
+  .badv-capacidades-page .badv-capacidades-card--4 {
+    grid-column: 2 / span 2;
+  }
+  .badv-capacidades-page .badv-capacidades-card--5 {
+    width: 100% !important;
+    grid-column: 4 / span 2;
+  }
+}
+
+/* ===========================================================================
    PUBLICACIONES — Blog nativo de Squarespace 7.0
    La colección y sus posts siguen siendo 100% editables desde el CMS. Estos
    estilos traducen el lenguaje visual del blog original a las clases que

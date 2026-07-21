@@ -74,7 +74,48 @@ function initHeaderTheme() {
   window.addEventListener('resize', updateState);
 }
 
+/* Convierte los cinco bloques Imagen nativos de /capacidades en tarjetas.
+   El contenido sigue perteneciendo al editor de Squarespace: aquí solo se
+   añaden clases e identificadores para maquetación y enlaces internos. */
+function initCapacidadesGrid() {
+  var path = window.location.pathname.replace(/\/+$/, '') || '/';
+  if (path !== '/capacidades') return;
+
+  document.body.classList.add('badv-capacidades-page');
+
+  var layout = document.querySelector('.site-page .sqs-layout');
+  if (!layout) return;
+
+  var blocks = Array.prototype.slice.call(
+    layout.querySelectorAll('.sqs-block-image')
+  ).slice(0, 5);
+
+  if (!blocks.length) return;
+
+  var parent = blocks[0].parentElement;
+  var sameParent = blocks.every(function (block) {
+    return block.parentElement === parent;
+  });
+
+  if (sameParent) parent.classList.add('badv-capacidades-grid');
+
+  var anchors = [
+    'levantamiento-de-capital',
+    'estructuracion-vehiculos',
+    'banca-de-inversion',
+    'finanzas-corporativas',
+    'project-finance'
+  ];
+
+  blocks.forEach(function (block, index) {
+    block.classList.add('badv-capacidades-card');
+    block.classList.add('badv-capacidades-card--' + (index + 1));
+    block.id = anchors[index];
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   initNavPanel();
   initHeaderTheme();
+  initCapacidadesGrid();
 });
