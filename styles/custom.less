@@ -910,6 +910,35 @@ body.nav-open .badv-side-nav { transform: translate(0, -50%); visibility: visibl
   transform: none !important;
 }
 
+/* En modo edición se muestra el título/subtítulo original del bloque Pila y
+   se oculta la copia visual. Así el cliente puede modificar el contenido con
+   las herramientas nativas; al salir del editor vuelve la tarjeta estable. */
+.sqs-edit-mode.badv-capacidades-page .badv-capacidades-card__visual,
+.sqs-edit-mode-active.badv-capacidades-page .badv-capacidades-card__visual {
+  display: none !important;
+}
+.sqs-edit-mode.badv-capacidades-page .badv-capacidades-card .image-title-wrapper,
+.sqs-edit-mode.badv-capacidades-page .badv-capacidades-card .image-subtitle-wrapper,
+.sqs-edit-mode-active.badv-capacidades-page .badv-capacidades-card .image-title-wrapper,
+.sqs-edit-mode-active.badv-capacidades-page .badv-capacidades-card .image-subtitle-wrapper {
+  display: block !important;
+  position: static !important;
+  inset: auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  margin: 0 0 0.75rem !important;
+  transform: none !important;
+}
+.sqs-edit-mode.badv-capacidades-page .badv-capacidades-card .image-title,
+.sqs-edit-mode.badv-capacidades-page .badv-capacidades-card .image-subtitle,
+.sqs-edit-mode-active.badv-capacidades-page .badv-capacidades-card .image-title,
+.sqs-edit-mode-active.badv-capacidades-page .badv-capacidades-card .image-subtitle {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+}
+
 @media (min-width: 640px) {
   .badv-capacidades-page .badv-capacidades-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
